@@ -7,12 +7,12 @@ const app = async (yargsObj) => {
     try {
         
         if (yargsObj.add) {
-            const movie = new Movie (yargsObj.title, yargsObj.actor);
-            console.log(await movie.add(collection))
+            const movie = new Movie (yargsObj.title, yargsObj.actor, yargsObj.year);
+            console.log(await movie.add(collection));
             // take movie info, add it to the mogodb database and cosole.log a success message
-        } else if (yargsObjs.list) {
-            const movie = new Movie (yargsObj.title, yargsObj.actor);
-            console.log(await movie.list())
+        } else if (yargsObj.list) {
+            const movie = new Movie (yargsObj.title, yargsObj.actor, yargsObj.year);
+            console.log(await movie.list(collection))
             //list all movies in database
         
     } else {
