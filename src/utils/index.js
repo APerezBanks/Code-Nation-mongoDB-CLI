@@ -1,32 +1,68 @@
 const { MongoDBNamespace } = require("mongodb");
+  class Movie {
+        constructor(title, actor, info = "Not specified") {
+          this.title = title;
+          this.actor = actor;
+          this.info = info;
+        }
+       // Create (CRUD)  
+        async add(collection) {
+          await collection.insertOne(this);
+          return "Success";
+          //add this to the database
+        }
+       //READ (CRUD)
+        async list(collection) {
+          return await collection.find().toArray();
+          //list all movies in the db
+        }
+        // UPDATE (CRUD)
+        async update(collection) {
+                return await collection.updateOne(
+                    
+                    { title : this.title} , {
+                    $set: {
+                            title: this.title,
+                            actor: this.actor,
+                            info:  this.info
+                          },})};
+      //Delete (CRUD)
+      async delete (collection){
+          return await collection.deleteOne({title : this.title});
+         
+      }
+      
 
-class Movie {
-    constructor ( title, actor, year = "Not specified" ) {
-        this.title = title;
-        this.actor = actor;
-
-    // added for task ///
-        this.year = year;
-
-    }
+      }
+      
+      module.exports = Movie;
 
 
 
 
-    // Create (CRUD)  add this to the database
+//       const { MongoDBNamespace } = require("mongodb");
 
-    async add (collection) {
-        await collection.insertOne(this);
-        return "Success";
-    }
+// class Movie {
+//     constructor ( title, actor, year = "Not specified" ) {
+//         this.title = title;
+//         this.actor = actor;
+//     // added for task ///
+//         this.year = year;
+//     }
+//  // Create (CRUD)  add this to the database
 
-    //READ (CRUD) list all movies in the db
+//     async add (collection) {
+//         await collection.insertOne(this);
+//         return "Success";
+//     }
 
-    async list (collection){
-            return await  collection.find().toArray();
+//     //READ (CRUD) list all movies in the db
+
+//     async list (collection){
+//             return await  collection.find().toArray();
            
           
-    }
+//     }
 
 
  // attemp numbert 1 to update
@@ -61,15 +97,15 @@ class Movie {
 
   //Update (CRUD) attemp 4
 
-    // async update (collection) {
-    //     console.log(update)
-    //     await collection.updateOne( 
-    //         { title : this.title }, 
-    //         { $set : {"actor" : this.actor} },
-    //         { $set : {"year" : this.year} }
-    //         );
-    //     return await  collection.find().toArray();
-    // }
+//     async update (collection) {
+//         console.log(update)
+//         await collection.updateOne( 
+//             { title : this.title }, 
+//             { $set : {"actor" : this.actor} },
+//             { $set : {"year" : this.year} }
+//             );
+//             return "success with update"
+//    }
 
 // attemp to delete 01
 
@@ -90,12 +126,9 @@ class Movie {
 
 
 
-}
-
-    module.exports = Movie;
 
 
 
-
+    // module.exports = Movie;
 
                                  
